@@ -60,6 +60,8 @@ Generates an ASCII tree using only the explicitly selected files and folders in 
 
 This extension is highly customizable! You can configure exactly how folder symbols and ASCII tree elements are drawn. Go to `Settings` -> `Extensions` -> `Copy File Names` to adjust these options:
 
+![settings](images/settings.gif)
+
 ### File Names
 
 - `amelianceCopyFileNames.names.folderEndSymbol`: Symbol added at the end of folder names in standard Name lists. _(Default: empty)_
