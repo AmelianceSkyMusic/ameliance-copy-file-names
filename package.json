@@ -1,9 +1,10 @@
 {
 	"name": "ameliance-copy-file-names",
-	"displayName": "Copy File Names",
+	"displayName": "Copy File Names & Folders & Trees",
 	"description": "Copy clean filenames from explorer without paths",
+	"icon": "images/copy-file-names-icon.png",
 	"publisher": "ameliance-skymusic",
-	"version": "0.0.1",
+	"version": "0.0.101",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AmelianceSkyMusic/ameliance-copy-file-names.git"
