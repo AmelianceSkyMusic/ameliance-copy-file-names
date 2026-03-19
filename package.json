@@ -1,0 +1,187 @@
+{
+	"name": "ameliance-copy-file-names",
+	"displayName": "Copy File Names & Folders & Trees",
+	"description": "Copy clean filenames from explorer without paths",
+	"icon": "images/copy-file-names-icon.png",
+	"publisher": "ameliance-skymusic",
+	"version": "0.0.101",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AmelianceSkyMusic/ameliance-copy-file-names.git"
+	},
+	"keywords": [
+		"file",
+		"status",
+		"badge"
+	],
+	"author": "Ameliance SkyMusic <AmelianceSkyMusic@gmail.com>",
+	"engines": {
+		"vscode": "^1.89.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": [
+			{
+				"title": "Copy File Names",
+				"properties": {}
+			},
+			{
+				"title": "File Names",
+				"properties": {
+					"ameliance-copy-file-names.names.folderEndSymbol": {
+						"type": "string",
+						"default": "",
+						"description": "Symbol at the end of folder names in Name lists (e.g., / or \\)"
+					}
+				}
+			},
+			{
+				"title": "Names With Folders",
+				"properties": {
+					"ameliance-copy-file-names.namesWithFolders.folderEndSymbol": {
+						"type": "string",
+						"default": "/",
+						"description": "Symbol at the end of folder names in 'With Folders' lists (e.g., / or \\)"
+					}
+				}
+			},
+			{
+				"title": "ASCII Tree",
+				"properties": {
+					"ameliance-copy-file-names.ascii.folderEndSymbol": {
+						"title": "ASCII Tree",
+						"type": "string",
+						"default": "/",
+						"description": "Symbol at the end of folder names in ASCII Tree (e.g., / or \\)"
+					},
+					"ameliance-copy-file-names.ascii.verticalLine": {
+						"type": "string",
+						"default": "│   ",
+						"description": "Vertical line symbol for the tree (prefix)"
+					},
+					"ameliance-copy-file-names.ascii.item": {
+						"type": "string",
+						"default": "├── ",
+						"description": "Symbol for a regular item (branch)"
+					},
+					"ameliance-copy-file-names.ascii.lastItem": {
+						"type": "string",
+						"default": "└── ",
+						"description": "Symbol for the last item in a folder (corner)"
+					},
+					"ameliance-copy-file-names.ascii.indent": {
+						"type": "string",
+						"default": "    ",
+						"description": "Indent spaces for child items under a last item (usually matches the length of other symbols)"
+					}
+				}
+			}
+		],
+		"commands": [
+			{
+				"command": "ameliance-copy-file-names.copyNames",
+				"title": "Copy: Names"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyFileNamesInFolderRecursive",
+				"title": "Copy: File Names In Folder (Recursive)"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyFileNamesInFolderFlat",
+				"title": "Copy: File Names In Folder (Flat)"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyNamesInFolderWithFoldersRecursive",
+				"title": "Copy: Names In Folder With Folders (Recursive)"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyNamesInFolderWithFoldersFlat",
+				"title": "Copy: Names In Folder With Folders (Flat)"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyAsTreeRecursive",
+				"title": "Copy: ASCII Tree (Recursive)"
+			},
+			{
+				"command": "ameliance-copy-file-names.copyAsTreeSelected",
+				"title": "Copy: ASCII Tree (Selected)"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "ameliance-copy-file-names.copyNames",
+					"group": "copy-special@1"
+				},
+				{
+					"command": "ameliance-copy-file-names.copyFileNamesInFolderFlat",
+					"group": "copy-special@2"
+				},
+				{
+					"submenu": "ameliance-copy-file-names.subMenu",
+					"group": "copy-special@3"
+				}
+			],
+			"ameliance-copy-file-names.subMenu": [
+				{
+					"command": "ameliance-copy-file-names.copyFileNamesInFolderRecursive",
+					"group": "1_file_names"
+				},
+				{
+					"command": "ameliance-copy-file-names.copyNamesInFolderWithFoldersRecursive",
+					"group": "2_names"
+				},
+				{
+					"command": "ameliance-copy-file-names.copyNamesInFolderWithFoldersFlat",
+					"group": "2_names"
+				},
+				{
+					"command": "ameliance-copy-file-names.copyAsTreeRecursive",
+					"group": "3_tree"
+				},
+				{
+					"command": "ameliance-copy-file-names.copyAsTreeSelected",
+					"group": "3_tree"
+				}
+			]
+		},
+		"submenus": [
+			{
+				"id": "ameliance-copy-file-names.subMenu",
+				"label": "Copy Special..."
+			}
+		],
+		"keybindings": [
+			{
+				"command": "ameliance-copy-file-names.copyNames",
+				"key": "shift+alt+c",
+				"when": "filesExplorerFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "vscode-test",
+		"lint-stage": "next lint"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.6",
+		"@types/node": "18.x",
+		"@types/vscode": "^1.89.0",
+		"@typescript-eslint/eslint-plugin": "^7.7.1",
+		"@typescript-eslint/parser": "^7.7.1",
+		"@vscode/test-cli": "^0.0.8",
+		"@vscode/test-electron": "^2.3.9",
+		"eslint": "^8.57.0",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"typescript": "^5.4.5"
+	}
+}
